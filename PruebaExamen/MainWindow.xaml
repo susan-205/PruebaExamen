@@ -6,7 +6,71 @@
         xmlns:local="clr-namespace:PruebaExamen"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="Titulo">
+            <Setter Property="FontFamily" Value="Segoe UI Black"></Setter>
+            <Setter Property="FontSize" Value="48"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            
+        </Style>
+        <Style TargetType="Image">
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Source" Value="C:\Users\alumno\Desktop\Examen DINT\Recursos\newyork2.jpg"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <DockPanel>
+        <ListBox x:Name="TiempoListBox" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding }"></TextBlock>
+                        <Image x:Name="ImagenLunes"></Image>
+                        <TextBlock>
+                        <Run></Run>
+                        <Run Text=" / "></Run>
+                        <Run></Run>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+           
+        </ListBox>
         
-    </Grid>
+        <StackPanel Orientation="Vertical">
+        <TextBlock Style="{StaticResource Titulo}" Text="El tiempo en New York"></TextBlock>
+            <Viewbox>
+                <Image x:Name="ImagenNewYork" Source="C:\Users\alumno\Desktop\Examen DINT\Recursos\newyork1.jpg" Margin="10" Height="60" Width="200"></Image>
+            </Viewbox>
+            <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Día"></TextBlock>
+                <TextBox x:Name="DiaTextBox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Predicción"></TextBlock>
+                <TextBox x:Name="PrediccionTextBox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Mínima(F)"></TextBlock>
+                <TextBox x:Name="MinimaTextBox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Máxima(F)"></TextBlock>
+                <TextBox x:Name="MaximaTextBox"></TextBox>
+            </StackPanel>
+
+        </StackPanel>
+
+
+    </DockPanel>
 </Window>

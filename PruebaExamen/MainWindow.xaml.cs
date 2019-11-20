@@ -23,6 +23,9 @@ namespace PruebaExamen
         public MainWindow()
         {
             InitializeComponent();
+            TiempoListBox.DataContext = PrediccionDia.ObtenerDatos();
+
+
         }
     }
 }
