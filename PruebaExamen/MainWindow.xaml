@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PruebaExamen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="El tiempo" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="Titulo">
             <Setter Property="FontFamily" Value="Segoe UI Black"></Setter>
@@ -19,58 +19,76 @@
             </Setter>
             
         </Style>
-        <Style TargetType="Image">
-            
+        <Style TargetType="Image" x:Key="principal">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Source" Value="C:\Users\alumno\Desktop\Examen DINT\Recursos\newyork2.jpg"></Setter>
+                    <Setter Property="Source" Value="C:\Users\susan\Desktop\Recursos\newyork2.jpg"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style TargetType="Image" x:Key="ImagenList">
+            <Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="60"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Prediccion}" Value="sol">
+                    
+                    <Setter Property="Source" Value="c:\Users\susan\Desktop\Recursos\sunny.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Prediccion}" Value="nubes">
+                    <Setter Property="Source" Value="c:\Users\susan\Desktop\Recursos\cloudy.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Prediccion}" Value="lluvia">
+                    <Setter Property="Source" Value="c:\Users\susan\Desktop\Recursos\rain.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Prediccion}" Value="nieve">
+                    <Setter Property="Source" Value="c:\Users\susan\Desktop\Recursos\snow.png"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate DataType="{x:Type local:PrediccionDia}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Dia}"></TextBlock>
+                <Image Style="{StaticResource ImagenList}"></Image>
+                <TextBlock>
+                        <Run Text="{Binding Maxima}"></Run>
+                        <Run Text="/"></Run>
+                        <Run Text="{Binding Minima}"></Run>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </Window.Resources>
     
     <DockPanel>
-        <ListBox x:Name="TiempoListBox" ItemsSource="{Binding}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding }"></TextBlock>
-                        <Image x:Name="ImagenLunes"></Image>
-                        <TextBlock>
-                        <Run></Run>
-                        <Run Text=" / "></Run>
-                        <Run></Run>
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-           
+        <ListBox DockPanel.Dock="Left" x:Name="TiempoListBox" ItemsSource="{Binding}">
         </ListBox>
+        <TextBlock DockPanel.Dock="Top" Style="{StaticResource Titulo}" Text="El tiempo en New York"></TextBlock>
         
-        <StackPanel Orientation="Vertical">
-        <TextBlock Style="{StaticResource Titulo}" Text="El tiempo en New York"></TextBlock>
-            <Viewbox>
-                <Image x:Name="ImagenNewYork" Source="C:\Users\alumno\Desktop\Examen DINT\Recursos\newyork1.jpg" Margin="10" Height="60" Width="200"></Image>
-            </Viewbox>
-            <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Día"></TextBlock>
-                <TextBox x:Name="DiaTextBox"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Predicción"></TextBlock>
-                <TextBox x:Name="PrediccionTextBox"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Mínima(F)"></TextBlock>
-                <TextBox x:Name="MinimaTextBox"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Máxima(F)"></TextBlock>
-                <TextBox x:Name="MaximaTextBox"></TextBox>
-            </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" DataContext="{Binding ElementName=TiempoListBox, Path=SelectedItem}">
+
+            <DockPanel Margin="10">
+             <TextBlock Margin="5" Text="Día"></TextBlock>
+                <TextBox x:Name="DiaTextBox" Text="{Binding Dia}"  Template="{DynamicResource TextBoxControlTemplate1}"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="10">
+                <TextBlock Margin="5" Text="Predicción"></TextBlock>
+                <TextBox x:Name="PrediccionTextBox" Text="{Binding Prediccion}" Template="{DynamicResource TextBoxControlTemplate1}"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="10">
+                <TextBlock Margin="5" Text="Mínima(F)"></TextBlock>
+                <TextBox x:Name="MinimaTextBox" Text="{Binding Minima}"  Template="{DynamicResource TextBoxControlTemplate1}"></TextBox>
+            </DockPanel>
+            <DockPanel Margin="10">
+                <TextBlock Margin="5" Text="Máxima(F)"></TextBlock>
+                <TextBox x:Name="MaximaTextBox" Text="{Binding Maxima}" Template="{DynamicResource TextBoxControlTemplate1}"></TextBox>
+            </DockPanel>
 
         </StackPanel>
 
+        <Viewbox>
+            <Image x:Name="ImagenNewYork" Style="{StaticResource principal}" Source="C:\Users\susan\Desktop\Recursos\newyork1.jpg" Margin="10" Height="60" Width="200"></Image>
+        </Viewbox>
 
     </DockPanel>
 </Window>

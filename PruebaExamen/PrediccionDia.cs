@@ -1,9 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-
-    public class PrediccionDia : INotifyPropertyChanged
-
+namespace PruebaExamen
+{
+    class PrediccionDia : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
@@ -22,6 +27,7 @@ using System.ComponentModel;
             set
             {
                 _dia = value;
+                NotifyPropertyChanged("Dia");
             }
         }
 
@@ -35,6 +41,7 @@ using System.ComponentModel;
             set
             {
                 _prediccion = value;
+                NotifyPropertyChanged("Prediccion");
             }
         }
 
@@ -48,6 +55,7 @@ using System.ComponentModel;
             set
             {
                 _minimaFarenheit = value;
+                NotifyPropertyChanged("Minima");
             }
         }
 
@@ -61,6 +69,7 @@ using System.ComponentModel;
             set
             {
                 _maximaFarenheit = value;
+                NotifyPropertyChanged("Maxima");
             }
         }
 
@@ -87,3 +96,4 @@ using System.ComponentModel;
             return resultado;
         }
     }
+}
